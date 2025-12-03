@@ -1,98 +1,89 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+📘 1) Receber documentos legais (PDF, DOCX, TXT)
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Você envia um contrato, legislação ou petição.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+🧠 2) Extrair texto e limpar conteúdo
 
-## Description
+Usa:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+pdf-parse
 
-## Project setup
+mammoth (para docx)
 
-```bash
-$ yarn install
-```
+normalização de acentos
 
-## Compile and run the project
+separação por seções
 
-```bash
-# development
-$ yarn run start
+📌 3) Classificar tipo do documento
 
-# watch mode
-$ yarn run start:dev
+IA responde:
 
-# production mode
-$ yarn run start:prod
-```
+contrato?
 
-## Run tests
+lei?
 
-```bash
-# unit tests
-$ yarn run test
+petição?
 
-# e2e tests
-$ yarn run test:e2e
+sentença?
 
-# test coverage
-$ yarn run test:cov
-```
+parecer?
 
-## Deployment
+🔍 4) Identificar tópicos jurídicos importantes
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Como:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+obrigações
 
-```bash
-$ yarn install -g @nestjs/mau
-$ mau deploy
-```
+penalidades
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+direitos
 
-## Resources
+riscos
 
-Check out a few resources that may come in handy when working with NestJS:
+prazos
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+referências legais
 
-## Support
+📑 5) Criar um resumo profissional
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Resumo jurídico em linguagem clara ou técnica.
 
-## Stay in touch
+🧬 6) Criar embeddings do texto
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Armazena no Postgres pgvector.
 
-## License
+Isso serve para:
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+buscas semânticas
+
+comparação entre documentos
+
+“onde este contrato contradiz o anterior?”
+
+⚠️ 7) Identificar riscos e inconsistências (não julgamento!)
+
+Tipo:
+
+cláusulas ambíguas
+
+termos contraditórios
+
+falta de especificação
+
+obrigações unilaterais
+
+📚 8) Conectar artigos semelhantes
+
+Ex.:
+
+“Este contrato trata de responsabilidade civil → veja artigos relacionados do Código Civil.”
+
+📎 9) Criar perguntas jurídicas automatizadas
+
+Ex.:
+
+Existe cláusula de rescisão?
+
+Há previsão de multas por descumprimento?
+
+Isso é ouro para advogados.
