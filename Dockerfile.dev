@@ -1,0 +1,22 @@
+# Dockerfile.dev para desenvolvimento
+FROM node:20-alpine
+
+# Instalar dependências do sistema
+RUN apk add --no-cache python3 make g++
+
+WORKDIR /app
+
+# Copiar arquivos de dependências
+COPY package.json yarn.lock ./
+
+# Instalar TODAS as dependências (incluindo devDependencies)
+RUN yarn install --frozen-lockfile
+
+# Copiar código fonte inicial (será sobrescrito pelo volume mount)
+COPY . .
+
+# Expor porta
+EXPOSE 3000
+
+# Comando padrão (será sobrescrito pelo docker-compose)
+CMD ["yarn", "start:dev"]

@@ -11,7 +11,7 @@ services:
       - "3000:3000"
     environment:
       - PORT=3000
-      - H2OGPT_API_URL=http://h2ogpt:7861
+      - H2OGPT_LINK=http://h2ogpt:7861
       # - DATABASE_URL=postgresql://legal_user:legal_pass@postgres:5432/legal_db
     depends_on:
       # - postgres

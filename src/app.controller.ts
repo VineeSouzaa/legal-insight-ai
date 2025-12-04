@@ -3,10 +3,14 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { AppService } from './app.service';
 import * as pdfParse from 'pdf-parse';
 import mammoth from 'mammoth';
+import {ReaderAI} from './services/readerAI'
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+
+  constructor(private readonly appService: AppService, private readonly readerAI: ReaderAI) {
+
+  }
 
   @Get()
   getHello(): string {
@@ -23,7 +27,11 @@ export class AppController {
     switch (type) {
       case 'pdf':
         const { text } = await pdfParse(file.buffer);
-        return text;
+        const { response } = await this.readerAI.readDocument(text);
+        return {
+          parsedText: text,
+          response
+        };
       case 'docx':
         const { value } = await mammoth.convertToHtml(Buffer.from(file.buffer) as any);
         return value;

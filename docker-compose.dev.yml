@@ -5,14 +5,14 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     container_name: legal-insight-api-dev
     ports:
       - "3000:3000"
     environment:
       - PORT=3000
       - NODE_ENV=development
-      - H2OGPT_API_URL=http://h2ogpt:7861
+      - H2OGPT_LINK=http://h2ogpt:7861
       # - DATABASE_URL=postgresql://legal_user:legal_pass@postgres:5432/legal_db
     depends_on:
       # - postgres
@@ -23,6 +23,7 @@ services:
       - ./yarn.lock:/app/yarn.lock
       - ./tsconfig.json:/app/tsconfig.json
       - ./nest-cli.json:/app/nest-cli.json
+      - ./.env:/app/.env  
       - /app/node_modules
     command: yarn start:dev
     networks:
