@@ -5,15 +5,26 @@ FROM python:3.10-slim
 RUN apt-get update && apt-get install -y \
     build-essential \
     git \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Instalar apenas o necessário
+# Instalar dependências com versões compatíveis
+# Instalar versões mínimas necessárias primeiro para evitar downgrade
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir \
+    # Instalar versões compatíveis primeiro (usar --upgrade-strategy only-if-needed)
+    pip install --no-cache-dir --upgrade-strategy only-if-needed \
+    "huggingface_hub>=0.21.0" \
+    "transformers>=4.40.0" \
+    "torch>=2.0.0" && \
+    # Instalar h2ogpt (pode tentar instalar versões antigas, mas serão ignoradas)
+    pip install --no-cache-dir --upgrade-strategy only-if-needed \
     h2ogpt[cpu] \
-    langchain
+    langchain && \
+    # Forçar versões corretas após instalação completa
+    pip install --no-cache-dir --upgrade --force-reinstall \
+    "huggingface_hub>=0.21.0"
 
 # Criar diretórios
 RUN mkdir -p /app/models /app/data
@@ -22,11 +33,11 @@ RUN mkdir -p /app/models /app/data
 EXPOSE 7860
 EXPOSE 7861
 
-# Variáveis
+# Variáveis de ambiente
 ENV H2OGPT_SERVER_NAME=0.0.0.0
 ENV H2OGPT_SERVER_PORT=7860
 ENV H2OGPT_API_NAME=0.0.0.0
 ENV H2OGPT_API_PORT=7861
 
-# Iniciar servidor h2oGPT
-CMD ["python", "-m", "h2ogpt", "--server_name=0.0.0.0", "--server_port=7860", "--api_name=0.0.0.0", "--api_port=7861"]
+# Iniciar servidor h2oGPT usando script direto
+CMD ["python", "-u", "-c", "from h2ogpt.generate import main; import sys; sys.argv = ['h2ogpt', '--server_name=0.0.0.0', '--server_port=7860', '--api_name=0.0.0.0', '--api_port=7861']; main()"]
